@@ -1,9 +1,10 @@
 <script setup>
-import { Navbar } from './components';
+import { Navbar, Searchbar } from './components';
 </script>
 
 <template>
   <div>
+    <Searchbar />
     <Navbar />
   </div>
 </template>

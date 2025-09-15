@@ -1,22 +1,51 @@
-<template>
-    <div>
-        <nav class="navbar">
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
-</template>
-
 <script>
 export default {
-    name: 'Navbar',
+  name: "Navbar",
 };
 </script>
+<template>
+  <div class="navbar">
+    <nav>
+      <div>
+        <div class="nav-item">
+          <router-link to="/">HOME</router-link>
+        </div>
+        <div class="nav-item">
+          <router-link to="/fermate">FERMATE</router-link>
+        </div>
+      </div>
+    </nav>
+  </div>
+</template>
 
-<style lang="scss" scoped>
+<style scoped>
+.nav-item {
+  display: inline-block;
+  font-size: 20px;
+  height: 100%;
+  padding: 15px;
+}
 
+.nav-item:hover {
+  color: white;
+  background-color: #1800ad;
+}
+
+.navbar {
+  background: #e3e3e3;
+  background: linear-gradient(
+    0deg,
+    rgba(227, 227, 227, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  color: #1800ad;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 100%;
+  display: block;
+  text-align: center;
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 </style>
