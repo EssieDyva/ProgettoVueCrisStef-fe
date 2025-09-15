@@ -1,10 +1,6 @@
 <template>
     <div>
         <nav class="navbar">
-            <div class="logo">
-                <img src="/vite.svg" alt="Vite Logo" />
-                <img src="./assets/vue.svg" alt="Vue Logo" />
-            </div>
             <ul class="nav-links">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About</a></li>
