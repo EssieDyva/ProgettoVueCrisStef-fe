@@ -11,22 +11,20 @@
 </template>
 
 <style>
-
 .news {
-    display: flex; 
+    display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
     margin-bottom: 20px;
-    border-radius: 50%; 
+    border-radius: 50%;
 }
 
-
 .text {
-    color: #0f0fd2; 
-    font-size: 20px; 
-    font-weight: bold; 
-    text-align: left; 
-    margin-bottom: 10px; 
+    color: #0f0fd2;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 10px;
 }
 </style>
