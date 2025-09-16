@@ -22,29 +22,25 @@ export default {
 
 
 
-
 <template>
 <div class="main-container">
     <div class="search-content">
         <div class="linea-group">
-            <h3 class="input-title">LINEA</h3>
-            <input type="text" v-model="linea" placeholder="Inserisci il numero di linea">
+            
         </div>
         
         <div class="fermata-group">
             <div class="input-group">
-                <h3 class="input-title">FERMATA DI PARTENZA</h3>
-                <input type="text" v-model="partenza" placeholder="Inserisci la fermata di partenza">
+                
             </div>
 
             <div class="input-group">
-                <h3 class="input-title">FERMATA DI ARRIVO</h3>
-                <input type="text" v-model="arrivo" placeholder="Inserisci la fermata di arrivo">
+                
             </div>
         </div>
         
         <div class="cerca-wrapper">
-            <div class="cerca-button" @click="handleCerca">CERCA</div>
+
         </div>
     </div>
 </div>
@@ -57,9 +53,8 @@ export default {
     border: 3px solid #260fd2;
     border-radius: 10px;
     padding: 4rem;
-    width: 450px;
+    width: 800px;  /* Aumentata la larghezza per allungarlo verso il centro */
     margin-top: 70px;
-    margin-left: 40px;
     box-sizing: border-box;
 }
 
@@ -115,7 +110,6 @@ margin-bottom: 5px;
 .search-content {
     display: flex;
     flex-direction: column;
-    gap: 45px;
 }
 
 </style>
