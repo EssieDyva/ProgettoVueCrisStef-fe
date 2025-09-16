@@ -17,19 +17,19 @@
 form {
     display: flex; 
     justify-content: flex-end;
-    border-radius: 50px; 
+    border-radius: 40px;
     align-items: center;
-    background: #212120; 
-    border: 1px solid #ccc; 
-    padding: 8px 15px; 
+    background: transparent;
+    border: 3px solid #1800ad; 
+    padding: 8px 15px;
     transition: all 0.3s ease;
-    width: 250px;
+    width: 400px;
+    height: 40px;
 }
 
 .searchbar {
-    margin: 30px; 
     display: flex; 
-    justify-content: flex-end; 
+    float: right;
 }
 
 ::placeholder {

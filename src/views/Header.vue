@@ -1,24 +1,27 @@
-<script>
-export default {
-    setup () {
-        
-
-        return {}
-    }
-}
+<script setup>
+import { Navbar, Searchbar } from '../components';
 </script>
 
 <template>
-    <div>
-        <img src="./assets/header.jpg" alt="Header Image" class="header-image"/>
+    <div class="header">
+        <img src="../assets/CRISTE.png" alt="Header Image" class="header-image"/>
         <Searchbar />
     </div>
     <div>
         <Navbar />
-        <News/>
     </div>
 </template>
 
-<style lang="scss" scoped>
-
+<style scoped>
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+img {
+    height: 80px;
+    width: auto;
+    margin: 20px
+    }
 </style>

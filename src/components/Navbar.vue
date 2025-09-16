@@ -1,7 +1,5 @@
 <script>
-export default {
-  name: "Navbar",
-};
+import { RouterLink } from 'vue-router';
 </script>
 <template>
   <div class="navbar">
@@ -27,6 +25,7 @@ export default {
 .nav-item:hover {
   color: white;
   background-color: #1800ad;
+  cursor: pointer;
 }
 
 .navbar {
