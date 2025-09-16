@@ -1,11 +1,10 @@
 <script setup>
-import { Navbar, Searchbar } from './components';
+import { Header } from './views';
 </script>
 
 <template>
   <div>
-    <Searchbar />
-    <Navbar />
+    <Header />
   </div>
 </template>
 
