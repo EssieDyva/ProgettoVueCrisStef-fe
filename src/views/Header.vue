@@ -1,14 +1,19 @@
 <script setup>
-import { Navbar, Searchbar } from '../components';
+import { Navbar, Searchbar, News } from '../components';
 </script>
 
 <template>
     <div class="header">
         <img src="../assets/CRISTE.png" alt="Header Image" class="header-image"/>
         <Searchbar />
+        
     </div>
     <div>
         <Navbar />
+    </div>
+    
+    <div>
+        <News />
     </div>
 </template>
 
