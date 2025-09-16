@@ -1,5 +1,5 @@
 <script setup>
-import { News } from '../components';
+import { News, Body } from '../components';
 </script>
 
 <template>
@@ -7,7 +7,7 @@ import { News } from '../components';
         <News />
     </div>
     <div>
-        <h1>Home Page</h1>
+        <Body />
     </div>
 </template>
 
