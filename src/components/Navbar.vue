@@ -6,14 +6,12 @@ export default {
 <template>
   <div class="navbar">
     <nav>
-      <div>
         <div class="nav-item">
-          <router-link to="/">HOME</router-link>
-        </div>
+          <RouterLink to="/">HOME</RouterLink>
+        </div>  
         <div class="nav-item">
-          <router-link to="/fermate">FERMATE</router-link>
+          <RouterLink to="/fermate">FERMATE</RouterLink>
         </div>
-      </div>
     </nav>
   </div>
 </template>
