@@ -1,5 +1,5 @@
 <script setup>
-import { Navbar, Searchbar, News } from '.';
+import { Navbar, Searchbar, News, Body } from '.';
 </script>
 
 <template>
@@ -12,6 +12,10 @@ import { Navbar, Searchbar, News } from '.';
     </div>
     <div>
         <News />
+    </div>
+
+    <div>
+        <Body />
     </div>
 </template>
 
