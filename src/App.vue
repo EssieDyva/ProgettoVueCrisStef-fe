@@ -5,8 +5,10 @@ import { Header } from './components';
 <template>
   <div>
     <Header />
-    <RouterView />
   </div>
+  <main>
+    <RouterView />
+  </main>
 </template>
 
 <style scoped>

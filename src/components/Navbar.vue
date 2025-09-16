@@ -3,12 +3,16 @@
 <template>
   <div class="navbar">
     <nav>
+      <RouterLink to="/">
         <div class="nav-item">
-          <RouterLink to="/">HOME</RouterLink>
-        </div>  
-        <div class="nav-item">
-          <RouterLink to="/fermate">FERMATE</RouterLink>
+          HOME
         </div>
+      </RouterLink>
+      <RouterLink to="/fermate">
+        <div class="nav-item">
+          FERMATE
+        </div>
+      </RouterLink>
     </nav>
   </div>
 </template>
@@ -20,10 +24,15 @@ nav {
   align-items: center;
   height: 40px;
 }
+
 .nav-item {
   display: inline-block;
   font-size: 20px;
   padding: 7px;
+}
+
+.nav-item:visited {
+  color: #1800ad;
 }
 
 .nav-item:hover {
@@ -34,11 +43,9 @@ nav {
 
 .navbar {
   background: #e3e3e3;
-  background: linear-gradient(
-    0deg,
-    rgba(227, 227, 227, 1) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
+  background: linear-gradient(0deg,
+      rgba(227, 227, 227, 1) 0%,
+      rgba(255, 255, 255, 1) 100%);
   color: #1800ad;
   width: 100%;
   display: block;
