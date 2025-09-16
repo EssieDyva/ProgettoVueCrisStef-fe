@@ -14,11 +14,16 @@
 </template>
 
 <style scoped>
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+}
 .nav-item {
   display: inline-block;
   font-size: 20px;
-  height: 100%;
-  padding: 15px;
+  padding: 7px;
 }
 
 .nav-item:hover {
@@ -35,9 +40,7 @@
     rgba(255, 255, 255, 1) 100%
   );
   color: #1800ad;
-  margin-bottom: 20px;
   width: 100%;
-  height: 100%;
   display: block;
   text-align: center;
   font-family: "Archivo Black", sans-serif;

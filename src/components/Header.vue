@@ -24,7 +24,7 @@ import { Navbar, Searchbar, News } from '.';
 }
 
 img {
-    height: 80px;
+    height: 70px;
     width: auto;
     margin: 20px
 }
