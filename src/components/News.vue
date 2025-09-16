@@ -1,12 +1,13 @@
-<script>
+<script setup>
+import { ref } from 'vue';
 
+const newsText = ref('');
+newsText.value = 'Benvenuti nel nostro sito!';
 </script>
 
 <template>
   <div class="news scroll-left">
-    <p class="paragrafo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, totam harum! Nostrum
-      sit id quaerat eos ex quo blanditiis deserunt, non et incidunt dolorum maxime illum necessitatibus quos magni.
-      Voluptatum!</p>
+    <p class="paragrafo">{{ newsText.toUpperCase() }}</p>
   </div>
 </template>
 
@@ -15,9 +16,8 @@
   margin-top: 5px;
   border: 3px solid #0f0fd2;
   height: 40px;
+  width: 100%;
   overflow: hidden;
-  display: flex;
-  align-items: center;
 }
 
 .scroll-left {
@@ -28,7 +28,7 @@
 .scroll-left p {
   margin: 0;
   transform: translateX(100%);
-  animation: scroll-left 45s linear infinite;
+  animation: scroll-left 25s linear infinite;
 }
 
 @keyframes scroll-left {
@@ -45,7 +45,7 @@
   color: #0f0fd2;
   font-size: 33px;
   font-weight: bold;
-  line-height: 1;
+  line-height: 40px;
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
