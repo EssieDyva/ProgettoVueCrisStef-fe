@@ -1,10 +1,11 @@
 <script setup>
-import { Header } from './views';
+import { Header } from './components';
 </script>
 
 <template>
   <div>
     <Header />
+    <RouterView />
   </div>
 </template>
 
