@@ -74,7 +74,7 @@ export default {
 }
 
 .input-title {
-color: #d8d416; 
+color: #ffda44; 
 font-size: 16px;
 font-weight: bold;
 margin-bottom: 5px;
@@ -96,7 +96,7 @@ margin-bottom: 5px;
 }
 
 .cerca-button {
-    background-color: #d8d416;
+    background-color: #ffda44;
     color: #0f0fe6;
     font-size: 18px;
     font-weight: bold;

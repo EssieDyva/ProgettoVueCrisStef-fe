@@ -95,7 +95,7 @@ export default {
 
 .lines-table th {
   background-color: #2512d5;
-  color: #d8d416;
+  color: #ffda44;
 }
 
 .lines-table td {
