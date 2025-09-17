@@ -56,7 +56,7 @@ export default {
     padding: 1rem;
     width: 90%;
     margin-top: 20px;
-    margin-left: 40px;
+    margin-left: 20px;
     margin-right: 40px;
     box-sizing: border-box;
 }
@@ -107,7 +107,7 @@ margin-bottom: 10px;
 
 .cerca-button {
     background-color: #d8d416;
-    color: #0f0fe6;
+    color: #2512d5;
     font-size: 18px;
     font-weight: bold;
     padding: 12px 20px;
@@ -127,7 +127,7 @@ margin-bottom: 10px;
     background: transparent;
     border: none;
     outline: none;
-    color:  #ffffff;
+    color:  #2512d5;
     font-style:normal;
     font-size: 30px;
     font-weight: bold;

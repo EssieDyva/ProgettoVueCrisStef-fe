@@ -49,7 +49,8 @@ height: 420px;
 position: relative;
 z-index: 0;
 margin-top: 25px;
-border-radius: 100px;
+margin-right: 20px;
+border-radius: 100%;
 }
 
 .leaflet-container {
