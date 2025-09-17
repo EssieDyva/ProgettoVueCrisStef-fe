@@ -55,7 +55,7 @@ export default {
     border-radius: 10px;
     padding: 4rem;
     width: 450px;
-    margin-top: 50px;
+    margin-top: 20px;
     margin-left: 40px;
     box-sizing: border-box;
 }
@@ -64,7 +64,7 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 45px;
-    margin-top: 20px;
+    margin-top: 10px;
     position: relative;
     background: transparent;
 }
@@ -79,7 +79,7 @@ export default {
 color: #d8d416; 
 font-size: 15px;
 font-weight: bold;
-margin-bottom: 5px;
+margin-bottom: 10px;
 }
 
 .linea-group input,
@@ -93,7 +93,7 @@ margin-bottom: 5px;
 }
 
 .cerca-wrapper {
-    margin-top: 25px;
+    margin-top: 5px;
     width: 100%;
 }
 
@@ -112,7 +112,7 @@ margin-bottom: 5px;
 .search-content {
     display: flex;
     flex-direction: column;
-    gap: 45px;
+    gap: 28px;
 }
 
 .text {
