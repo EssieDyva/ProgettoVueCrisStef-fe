@@ -20,9 +20,6 @@ export default {
 };
 </script>
 
-
-
-
 <template>
 <div class="main-container">
     <div class="search-content">
@@ -58,7 +55,7 @@ export default {
     border-radius: 10px;
     padding: 4rem;
     width: 450px;
-    margin-top: 70px;
+    margin-top: 50px;
     margin-left: 40px;
     box-sizing: border-box;
 }
@@ -89,7 +86,7 @@ margin-bottom: 5px;
 .input-group input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #e5d70f;
     border-radius: 5px;
     font-size: 14px;
     box-sizing: border-box;
