@@ -98,6 +98,10 @@ export default {
   color: #d8d416;
 }
 
+.lines-table td {
+  font-weight: 100;
+}
+
 .lines-row {
   width: 15%;
 }

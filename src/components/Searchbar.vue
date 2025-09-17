@@ -53,7 +53,13 @@ input {
     outline: none;
     color: #f0e9e9;
     font-size: 16px;
-    width: 200px;
+    width: 100%;
     transition: width 0.3s ease;
+}
+
+@media (max-width: 750px) {
+    form {
+        width: 250px;
+    }
 }
 </style>
