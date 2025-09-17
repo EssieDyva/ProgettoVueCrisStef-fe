@@ -51,10 +51,12 @@ input {
     background: transparent;
     border: none;
     outline: none;
-    color: #f0e9e9;
-    font-size: 16px;
+    color:  #1800ad;
+    font-style:normal;
+    font-size: 30px;
     width: 100%;
     transition: width 0.3s ease;
+    font-weight: bold;
 }
 
 @media (max-width: 750px) {
