@@ -50,7 +50,6 @@ nav {
   width: 100%;
   display: block;
   text-align: center;
-  font-family: "Archivo Black", sans-serif;
   font-weight: 400;
   font-style: normal;
 }

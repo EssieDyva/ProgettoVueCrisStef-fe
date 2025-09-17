@@ -50,6 +50,5 @@ newsText.value = 'Benvenuti nel nostro sito!';
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-family: "Archivo Black", sans-serif;
 }
 </style>
