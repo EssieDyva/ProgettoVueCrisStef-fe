@@ -53,10 +53,11 @@ export default {
     background-color: #2512d5;
     border: 3px solid #260fd2;
     border-radius: 10px;
-    padding: 4rem;
-    width: 450px;
+    padding: 1rem;
+    width: 90%;
     margin-top: 20px;
     margin-left: 40px;
+    margin-right: 40px;
     box-sizing: border-box;
 }
 
@@ -90,6 +91,13 @@ margin-bottom: 10px;
     border-radius: 5px;
     font-size: 14px;
     box-sizing: border-box;
+    background-color: white;
+}
+
+.linea-group input::placeholder,
+.input-group input::placeholder {
+    color: #2512d5;
+    opacity: 50%;
 }
 
 .cerca-wrapper {
@@ -126,6 +134,4 @@ margin-bottom: 10px;
     width: 100%;
     transition: width 0.3s ease;
 }
-
-
 </style>
