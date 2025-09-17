@@ -1,31 +1,23 @@
 <template>
   <div class="lines-container">
-    <h1>Linee e Fermate</h1>
-
     <div v-if="lines.length">
-      <div v-for="line in lines" :key="line.id" class="line-block">
-        <h3 class="line-title">{{ line.name }}</h3>
-
-        <table class="table table-bordered stops-table">
-          <thead>
-            <tr>
-              <th style="width: 10%">#</th>
-              <th>Nome Fermata</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(stop, index) in line.stops" :key="stop.id">
-              <td>{{ index + 1 }}</td>
-              <td>{{ stop.name }}</td>
-            </tr>
-            <tr v-if="!line.stops.length">
-              <td colspan="2" class="text-center text-muted">Nessuna fermata disponibile</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <table class="lines-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th v-for="line in lines" :key="line.id">{{ line.name.toUpperCase() }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="rowIndex in maxStops" :key="rowIndex">
+            <td class="rowindex">{{ rowIndex }}</td>
+            <td v-for="line in lines" :key="line.id" class="lines-row">
+              {{ line.stops[rowIndex - 1]?.name || '' }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
     <div v-else>
       <p class="text-muted">Nessuna linea disponibile.</p>
     </div>
@@ -39,22 +31,44 @@ export default {
       lines: [
         {
           id: 1,
-          name: 'Linea 1',
+          name: 'Linea 9',
           stops: [
-            { id: 1, name: 'Fermata A' },
-            { id: 2, name: 'Fermata B' }
+            { id: 1, name: 'STAMPALIA CAP.' },
+            { id: 2, name: 'CALTANISSETTA' },
+            { id: 3, name: 'BROSSO'},
+            { id: 4, name: 'LARGO GROSSETO NORD'},
+            { id: 5, name: 'MADONNA DI CAMPAGNA'}
           ]
         },
         {
           id: 2,
-          name: 'Linea 2',
+          name: 'Linea 60',
           stops: [
-            { id: 3, name: 'Fermata C' },
-            { id: 4, name: 'Fermata D' }
+            { id: 6, name: 'PARIS CAP.' },
+            { id: 7, name: 'DESTEFANIS' },
+            { id: 8, name: 'BRAMAFAME'},
+            { id: 9, name: 'STAMPALIA'},
+            { id: 10, name: 'CALTANISSETTA'}
+          ]
+        },
+        {
+          id: 3,
+          name: 'Linea 11',
+          stops: [
+            { id: 11, name: 'DE GASPERI CAP.' },
+            { id: 12, name: 'SAN GIUSEPPE' },
+            { id: 13, name: 'IV NOVEMBRE CAP.'},
+            { id: 14, name: 'FILZI'},
+            { id: 15, name: 'STAZIONE VENARIA'}
           ]
         }
       ]
     };
+  },
+  computed: {
+    maxStops() {
+      return Math.max(...this.lines.map(line => line.stops.length));
+    }
   }
 };
 </script>
@@ -63,30 +77,40 @@ export default {
 .lines-container {
   padding: 20px;
   background-color: #f9f9f9;
+  overflow-x: auto;
 }
 
-.line-block {
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 16px;
-  margin-bottom: 24px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+.lines-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.line-title {
-  margin-bottom: 16px;
-  color: #333;
-  font-weight: bold;
-}
-
-.stops-table {
-  margin-bottom: 0;
-}
-
-.stops-table th,
-.stops-table td {
-  vertical-align: middle;
+.lines-table th,
+.lines-table td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
   text-align: left;
+  vertical-align: middle;
+}
+
+.lines-table th {
+  background-color: #2512d5;
+  color: #d8d416;
+}
+
+.lines-table td {
+  font-weight: 100;
+}
+
+.lines-row {
+  width: 15%;
+}
+
+.text-muted {
+  color: #888;
+}
+
+.rowindex {
+  width: 1%;
 }
 </style>

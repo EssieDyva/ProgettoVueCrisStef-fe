@@ -1,14 +1,24 @@
 <script setup>
-import { News } from '../components';
+import { News, Body, Bodyform, Map } from '../components';
 </script>
 
 <template>
     <div>
         <News />
     </div>
-    <div>
-        <h1>Home Page</h1>
+    <div class="content-container">
+        <Body />
+        <Bodyform />
+        <Map />
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.content-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+</style>
