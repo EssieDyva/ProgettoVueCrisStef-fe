@@ -15,6 +15,7 @@ newsText.value = 'Benvenuti nel nostro sito!';
 .news {
   margin-top: 5px;
   border: 3px solid #0f0fd2;
+  border-style: solid none;
   height: 40px;
   width: 100%;
   overflow: hidden;
