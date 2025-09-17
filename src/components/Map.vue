@@ -45,10 +45,11 @@ this.$refs.map.mapObject.invalidateSize()
 <style>
 .map-container {
 width: 100%;
-height: 500px;
+height: 420px;
 position: relative;
 z-index: 0;
-margin-top: 50px;
+margin-top: 25px;
+border-radius: 100px;
 }
 
 .leaflet-container {

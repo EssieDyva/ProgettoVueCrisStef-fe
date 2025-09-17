@@ -25,18 +25,18 @@ export default {
     <div class="search-content">
         <div class="linea-group">
             <h3 class="input-title">LINEA</h3>
-            <input type="text" v-model="linea" placeholder="Inserisci il numero di linea">
+            <input class="text" v-model="linea" placeholder="Inserisci il numero di linea">
         </div>
         
         <div class="fermata-group">
             <div class="input-group">
                 <h3 class="input-title">FERMATA DI PARTENZA</h3>
-                <input type="text" v-model="partenza" placeholder="Inserisci la fermata di partenza">
+                <input class="text" v-model="partenza" placeholder="Inserisci la fermata di partenza">
             </div>
 
             <div class="input-group">
                 <h3 class="input-title">FERMATA DI ARRIVO</h3>
-                <input type="text" v-model="arrivo" placeholder="Inserisci la fermata di arrivo">
+                <input class="text" v-model="arrivo" placeholder="Inserisci la fermata di arrivo">
             </div>
         </div>
         
@@ -53,10 +53,11 @@ export default {
     background-color: #2512d5;
     border: 3px solid #260fd2;
     border-radius: 10px;
-    padding: 4rem;
-    width: 450px;
-    margin-top: 50px;
+    padding: 1rem;
+    width: 90%;
+    margin-top: 20px;
     margin-left: 40px;
+    margin-right: 40px;
     box-sizing: border-box;
 }
 
@@ -64,7 +65,7 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 45px;
-    margin-top: 20px;
+    margin-top: 10px;
     position: relative;
     background: transparent;
 }
@@ -77,23 +78,30 @@ export default {
 
 .input-title {
 color: #d8d416; 
-font-size: 16px;
+font-size: 15px;
 font-weight: bold;
-margin-bottom: 5px;
+margin-bottom: 10px;
 }
 
 .linea-group input,
 .input-group input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #e5d70f;
+    border: 1px solid #d8d416;
     border-radius: 5px;
     font-size: 14px;
     box-sizing: border-box;
+    background-color: white;
+}
+
+.linea-group input::placeholder,
+.input-group input::placeholder {
+    color: #2512d5;
+    opacity: 50%;
 }
 
 .cerca-wrapper {
-    margin-top: 25px;
+    margin-top: 5px;
     width: 100%;
 }
 
@@ -112,7 +120,18 @@ margin-bottom: 5px;
 .search-content {
     display: flex;
     flex-direction: column;
-    gap: 45px;
+    gap: 28px;
 }
 
+.text {
+    background: transparent;
+    border: none;
+    outline: none;
+    color:  #ffffff;
+    font-style:normal;
+    font-size: 30px;
+    font-weight: bold;
+    width: 100%;
+    transition: width 0.3s ease;
+}
 </style>
