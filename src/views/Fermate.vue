@@ -4,14 +4,14 @@
       <table class="lines-table">
         <thead>
           <tr>
-            <th style="width: 5%">#</th>
-            <th v-for="line in lines" :key="line.id">{{ line.name }}</th>
+            <th>#</th>
+            <th v-for="line in lines" :key="line.id">{{ line.name.toUpperCase() }}</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="rowIndex in maxStops" :key="rowIndex">
-            <td>{{ rowIndex }}</td>
-            <td v-for="line in lines" :key="line.id">
+            <td class="rowindex">{{ rowIndex }}</td>
+            <td v-for="line in lines" :key="line.id" class="lines-row">
               {{ line.stops[rowIndex - 1]?.name || '' }}
             </td>
           </tr>
@@ -93,7 +93,20 @@ export default {
   vertical-align: middle;
 }
 
+.lines-table th {
+  background-color: #2512d5;
+  color: #d8d416;
+}
+
+.lines-row {
+  width: 15%;
+}
+
 .text-muted {
   color: #888;
+}
+
+.rowindex {
+  width: 1%;
 }
 </style>
