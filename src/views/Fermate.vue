@@ -12,7 +12,7 @@
           <tr v-for="rowIndex in maxStops" :key="rowIndex">
             <td class="rowindex">{{ rowIndex }}</td>
             <td v-for="line in lines" :key="line.id" class="lines-row">
-              {{ line.stops[rowIndex - 1]?.name || '' }}
+              {{ line.stops[rowIndex - 1]?.name.toUpperCase() || '' }}
             </td>
           </tr>
         </tbody>
