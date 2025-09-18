@@ -120,7 +120,7 @@ onMounted(() => {
         </div>
         
         <div class="cerca-wrapper">
-            <div class="cerca-button" @click="handleCerca">CERCA</div>
+            <div class="cerca-button" @click="handleCerca" :class="{ disabled: !linea || !partenza || !arrivo}">CERCA</div>
         </div>
     </div>
 </div>
@@ -193,6 +193,12 @@ margin-bottom: 10px;
     border-radius: 5px;
     cursor: pointer;
     user-select: none;
+}
+
+.cerca-button.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
 }
 
 .search-content {
