@@ -62,7 +62,7 @@ const handleCerca = () => {
     })
 }
 
-// Carica le linee al mount del componente
+
 onMounted(() => {
     caricaLinee()
 })
@@ -137,6 +137,7 @@ onMounted(() => {
     margin-left: 20px;
     margin-right: 40px;
     box-sizing: border-box;
+    max-width: 671px;
 }
 
 .main-container form {
@@ -176,6 +177,7 @@ margin-bottom: 10px;
 .input-group input::placeholder {
     color: #2512d5;
     opacity: 50%;
+    
 }
 
 .cerca-wrapper {
@@ -196,9 +198,9 @@ margin-bottom: 10px;
 }
 
 .cerca-button.disabled {
-  opacity: 0.5;
-  pointer-events: none;
-  cursor: not-allowed;
+opacity: 0.5;
+pointer-events: none;
+cursor: not-allowed;
 }
 
 .search-content {
@@ -214,5 +216,7 @@ margin-bottom: 10px;
     font-weight: bold;
     width: 100%;
     transition: width 0.3s ease;
+    text-transform: uppercase;
+    padding: 3px;
 }
 </style>
