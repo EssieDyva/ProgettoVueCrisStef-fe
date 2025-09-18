@@ -16,7 +16,7 @@
             </tbody>
         </table>
         <div class="cerca-wrapper">
-            <div class="cerca-button" @click="handleCerca" :class="{ disabled: !linea || !partenza || !arrivo}">CHIUDI RICERCA</div>
+            <div class="cerca-button" @click="$emit('chiudi')">CHIUDI RICERCA</div>
         </div>
     </div>
 </template>
