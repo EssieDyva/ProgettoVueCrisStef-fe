@@ -1,5 +1,20 @@
 <script setup>
-import { News, Form, Map } from '../components';
+import { ref } from 'vue'
+import { News, Form, Map, FormResponse } from '../components'
+
+const datiRicerca = ref({
+    linea: '',
+    partenza: '',
+    arrivo: '',
+    fermate: []
+})
+
+const ricercaEffettuata = ref(false)
+
+function risultato(payload) {
+    datiRicerca.value = payload
+    ricercaEffettuata.value = true
+}
 </script>
 
 <template>
@@ -7,8 +22,10 @@ import { News, Form, Map } from '../components';
         <News />
     </div>
     <div class="content-container">
-        <Form />
-        <Map />
+        <Form @cerca="risultato" />
+        <FormResponse v-if="ricercaEffettuata" :linea="datiRicerca.linea" :partenza="datiRicerca.partenza"
+            :arrivo="datiRicerca.arrivo" :fermate="datiRicerca.fermate" />
+        <Map v-else/>
     </div>
 </template>
 

@@ -57,7 +57,8 @@ const handleCerca = () => {
     emit('cerca', {
         linea: linea.value,
         partenza: partenza.value,
-        arrivo: arrivo.value
+        arrivo: arrivo.value,
+        fermate: fermate.value.map(f => f.nome)
     })
 }
 
