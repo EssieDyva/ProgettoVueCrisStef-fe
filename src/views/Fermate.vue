@@ -24,53 +24,45 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      lines: [
-        {
-          id: 1,
-          name: 'Linea 9',
-          stops: [
-            { id: 1, name: 'STAMPALIA CAP.' },
-            { id: 2, name: 'CALTANISSETTA' },
-            { id: 3, name: 'BROSSO'},
-            { id: 4, name: 'LARGO GROSSETO NORD'},
-            { id: 5, name: 'MADONNA DI CAMPAGNA'}
-          ]
-        },
-        {
-          id: 2,
-          name: 'Linea 60',
-          stops: [
-            { id: 6, name: 'PARIS CAP.' },
-            { id: 7, name: 'DESTEFANIS' },
-            { id: 8, name: 'BRAMAFAME'},
-            { id: 9, name: 'STAMPALIA'},
-            { id: 10, name: 'CALTANISSETTA'}
-          ]
-        },
-        {
-          id: 3,
-          name: 'Linea 11',
-          stops: [
-            { id: 11, name: 'DE GASPERI CAP.' },
-            { id: 12, name: 'SAN GIUSEPPE' },
-            { id: 13, name: 'IV NOVEMBRE CAP.'},
-            { id: 14, name: 'FILZI'},
-            { id: 15, name: 'STAZIONE VENARIA'}
-          ]
-        }
-      ]
-    };
-  },
-  computed: {
-    maxStops() {
-      return Math.max(...this.lines.map(line => line.stops.length));
-    }
+<script setup>
+import { ref, onMounted } from 'vue';
+import { getFermate } from '../helpers/api'
+
+const rawStops = ref([]);
+const lines = ref([]);
+const maxStops = ref(0);
+
+const fetchStops = async () => {
+  try {
+    const response = await getFermate();
+    const data = response.data;
+    rawStops.value = data;
+
+    const grouped = {};
+    data.forEach(stop => {
+      const lineNumber = stop.numeroLinea;
+      if (!grouped[lineNumber]) {
+        grouped[lineNumber] = [];
+      }
+      grouped[lineNumber].push({
+        id: stop.idFermata,
+        name: stop.nomeFermata,
+      });
+    });
+
+    lines.value = Object.entries(grouped).map(([lineNumber, stops]) => ({
+      id: parseInt(lineNumber),
+      name: `Linea ${lineNumber}`,
+      stops,
+    }));
+
+    maxStops.value = Math.max(...lines.value.map(line => line.stops.length));
+  } catch (error) {
+    console.error('Errore durante il fetch delle fermate:', error);
   }
 };
+
+onMounted(fetchStops);
 </script>
 
 <style scoped>

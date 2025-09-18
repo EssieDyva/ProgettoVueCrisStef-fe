@@ -7,7 +7,7 @@ import { News, Body, Map } from '../components';
         <News />
     </div>
     <div class="content-container">
-        <Body />    
+        <Body />
         <Map />
     </div>
 </template>
