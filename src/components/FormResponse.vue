@@ -15,6 +15,9 @@
                 </tr>
             </tbody>
         </table>
+        <div class="cerca-wrapper">
+            <div class="cerca-button" @click="handleCerca" :class="{ disabled: !linea || !partenza || !arrivo}">CHIUDI RICERCA</div>
+        </div>
     </div>
 </template>
 
@@ -117,5 +120,13 @@ border-right: none;
 font-weight: 500;
 width: 40px;
 text-align: left;
+}
+
+.cerca-wrapper {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    margin-top: 5%;
+    font-weight: bold;
 }
 </style>
