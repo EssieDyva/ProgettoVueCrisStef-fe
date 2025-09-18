@@ -1,23 +1,79 @@
-<script>
-export default {
-    data() {
-        return {
-            linea: '',
-            partenza: '',
-            arrivo: ''
-        }
-    },
-    methods: {
-        handleCerca() {
-            
-            this.$emit('cerca', {
-                linea: this.linea,
-                partenza: this.partenza,
-                arrivo: this.arrivo
-            });
-        }
+<script setup>
+import { ref, watch, onMounted } from 'vue'
+import { getFermate } from '../helpers/api'
+
+// Props ed emits
+const emit = defineEmits(['cerca'])
+
+// Reactive data
+const linea = ref('')
+const partenza = ref('')
+const arrivo = ref('')
+const linee = ref([])
+const fermate = ref([])
+
+// Funzione per caricare le linee
+const caricaLinee = async () => {
+    try {
+        const response = await getFermate()
+        
+        // Estrai le linee uniche dai dati delle fermate
+        const lineeUniche = [...new Set(response.data.map(fermata => fermata.numeroLinea))]
+        linee.value = lineeUniche.map(numeroLinea => ({
+            id: numeroLinea,
+            numero: numeroLinea
+        })).sort((a, b) => a.numero - b.numero)
+        
+    } catch (error) {
+        console.error('Errore nel caricamento delle linee:', error)
     }
-};
+}
+
+// Funzione per caricare le fermate in base alla linea selezionata
+const caricaFermate = async (numeroLinea) => {
+    try {
+        const response = await getFermate()
+        
+        // Filtra le fermate in base alla linea selezionata
+        const fermateLinea = response.data.filter(fermata => fermata.numeroLinea == numeroLinea)
+        
+        fermate.value = fermateLinea.map(fermata => ({
+            id: fermata.idFermata,
+            nome: fermata.nomeFermata
+        }))
+        
+    } catch (error) {
+        console.error('Errore nel caricamento delle fermate:', error)
+        fermate.value = []
+    }
+}
+
+// Watcher per la linea selezionata
+watch(linea, (nuovaLinea) => {
+    // Reset delle fermate quando cambia la linea
+    partenza.value = ''
+    arrivo.value = ''
+    
+    if (nuovaLinea) {
+        caricaFermate(nuovaLinea)
+    } else {
+        fermate.value = []
+    }
+})
+
+// Funzione per gestire la ricerca
+const handleCerca = () => {
+    emit('cerca', {
+        linea: linea.value,
+        partenza: partenza.value,
+        arrivo: arrivo.value
+    })
+}
+
+// Carica le linee al mount del componente
+onMounted(() => {
+    caricaLinee()
+})
 </script>
 
 <template>
@@ -25,18 +81,49 @@ export default {
     <div class="search-content">
         <div class="linea-group">
             <h3 class="input-title">LINEA</h3>
-            <input class="text" v-model="linea" placeholder="Inserisci il numero di linea">
+            <select class="text" v-model="linea">
+                <option value="">Seleziona una linea</option>
+                <option 
+                    v-for="lineaOption in linee" 
+                    :key="lineaOption.id" 
+                    :value="lineaOption.numero"
+                >
+                    Linea {{ lineaOption.numero }}
+                </option>
+            </select>
         </div>
         
         <div class="fermata-group">
             <div class="input-group">
                 <h3 class="input-title">FERMATA DI PARTENZA</h3>
-                <input class="text" v-model="partenza" placeholder="Inserisci la fermata di partenza">
+                <select class="text" v-model="partenza" :disabled="!linea">
+                    <option value="">
+                        {{ linea ? 'Seleziona fermata di partenza' : 'Scegliere una linea' }}
+                    </option>
+                    <option 
+                        v-for="fermata in fermate" 
+                        :key="fermata.id" 
+                        :value="fermata.nome"
+                    >
+                        {{ fermata.nome }}
+                    </option>
+                </select>
             </div>
 
             <div class="input-group">
                 <h3 class="input-title">FERMATA DI ARRIVO</h3>
-                <input class="text" v-model="arrivo" placeholder="Inserisci la fermata di arrivo">
+                <select class="text" v-model="arrivo" :disabled="!linea">
+                    <option value="">
+                        {{ linea ? 'Seleziona fermata di arrivo' : 'Scegliere una linea' }}
+                    </option>
+                    <option 
+                        v-for="fermata in fermate" 
+                        :key="fermata.id" 
+                        :value="fermata.nome"
+                    >
+                        {{ fermata.nome }}
+                    </option>
+                </select>
             </div>
         </div>
         
@@ -48,7 +135,6 @@ export default {
 </template>
 
 <style>
-
 .main-container {
     background-color: #2512d5;
     border: 3px solid #260fd2;
@@ -124,11 +210,8 @@ margin-bottom: 10px;
 }
 
 .text {
-    background: transparent;
-    border: none;
-    outline: none;
+    border-radius: 10px;
     color:  #2512d5;
-    font-style:normal;
     font-size: 30px;
     font-weight: bold;
     width: 100%;
