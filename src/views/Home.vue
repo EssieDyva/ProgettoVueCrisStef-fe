@@ -1,5 +1,5 @@
 <script setup>
-import { News, Body, Map } from '../components';
+import { News, Form, Map } from '../components';
 </script>
 
 <template>
@@ -7,7 +7,7 @@ import { News, Body, Map } from '../components';
         <News />
     </div>
     <div class="content-container">
-        <Body />
+        <Form />
         <Map />
     </div>
 </template>

@@ -2,22 +2,18 @@
 import { ref, watch, onMounted } from 'vue'
 import { getFermate } from '../helpers/api'
 
-// Props ed emits
 const emit = defineEmits(['cerca'])
 
-// Reactive data
 const linea = ref('')
 const partenza = ref('')
 const arrivo = ref('')
 const linee = ref([])
 const fermate = ref([])
 
-// Funzione per caricare le linee
 const caricaLinee = async () => {
     try {
         const response = await getFermate()
         
-        // Estrai le linee uniche dai dati delle fermate
         const lineeUniche = [...new Set(response.data.map(fermata => fermata.numeroLinea))]
         linee.value = lineeUniche.map(numeroLinea => ({
             id: numeroLinea,
@@ -29,12 +25,10 @@ const caricaLinee = async () => {
     }
 }
 
-// Funzione per caricare le fermate in base alla linea selezionata
 const caricaFermate = async (numeroLinea) => {
     try {
         const response = await getFermate()
         
-        // Filtra le fermate in base alla linea selezionata
         const fermateLinea = response.data.filter(fermata => fermata.numeroLinea == numeroLinea)
         
         fermate.value = fermateLinea.map(fermata => ({
@@ -48,9 +42,7 @@ const caricaFermate = async (numeroLinea) => {
     }
 }
 
-// Watcher per la linea selezionata
 watch(linea, (nuovaLinea) => {
-    // Reset delle fermate quando cambia la linea
     partenza.value = ''
     arrivo.value = ''
     
@@ -61,7 +53,6 @@ watch(linea, (nuovaLinea) => {
     }
 })
 
-// Funzione per gestire la ricerca
 const handleCerca = () => {
     emit('cerca', {
         linea: linea.value,
