@@ -11,6 +11,4 @@ import { Header } from './components';
   </main>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
