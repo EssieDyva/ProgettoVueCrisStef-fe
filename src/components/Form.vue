@@ -218,4 +218,13 @@ onMounted(() => {
     text-transform: uppercase;
     padding: 3px;
 }
+
+.cerca-button:hover {
+background-color:  #e3c412;
+}
+
+.cerca-button:active {
+background-color: #004085; 
+transform: translateY(1px); 
+}
 </style>

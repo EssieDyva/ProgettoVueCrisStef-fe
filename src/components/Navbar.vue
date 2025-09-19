@@ -29,9 +29,6 @@ nav {
   display: inline-block;
   font-size: 20px;
   padding: 7px;
-}
-
-.nav-item:visited {
   color: #1800ad;
 }
 
