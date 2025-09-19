@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getFermate } from '../helpers/api'
+import { getFermate, insertFermate} from '../helpers/api'
+
 
 const rawStops = ref([]);
 const lines = ref([]);
@@ -53,6 +54,75 @@ const fetchStops = async () => {
 onMounted(fetchStops);
 
 
+
+//POST CHIAMATA API
+
+/*
+const nomeFermata = ref('');
+const messaggio = ref('');
+
+const handleAggiungiFermata = async () => {
+
+  messaggio.value = '';
+  if (!nomeFermata.value) {
+    messaggio.value = 'Per favore, inserisci un nome per la fermata.';
+    return;
+  }
+  
+  const datiFermata = {
+    nome: nomeFermata.value,
+    latitudine: 0.0,  // Valori di esempio, da sostituire con dati reali
+    longitudine: 0.0
+  };
+
+  try {
+    const response = await fetch('http://localhost:8081/api', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(datiFermata)
+    });
+
+    if (!response.ok) {
+      throw new Error(`Errore del server: ${response.status}`);
+    }
+
+    const datiRisposta = await response.json();
+    messaggio.value = `Fermata '${datiRisposta.nome}' aggiunta con successo!`;
+    console.log('Fermata salvata:', datiRisposta);
+
+    // Resetta l'input per la prossima aggiunta
+    nomeFermata.value = '';
+
+  } catch (error) {
+    messaggio.value = `Errore nell'aggiungere la fermata: ${error.message}`;
+    console.error(error);
+  }
+};
+*/
+
+//POPPUP
+
+// Definisce una variabile reattiva per controllare la visibilità del popup
+const isPopupVisible = ref(false);
+
+// La funzione @click del tuo bottone
+const handleCerca = () => {
+  // Qui puoi mettere la logica della chiamata API vista in precedenza
+  
+  // Dopo aver completato l'operazione (o anche prima, a seconda del design),
+  // rendi il popup visibile
+  isPopupVisible.value = true;
+};
+
+// Funzione per chiudere il popup
+const closePopup = () => {
+  isPopupVisible.value = false;
+};
+
+
+
 </script>
 
 <template>
@@ -81,6 +151,17 @@ onMounted(fetchStops);
     <div class="cerca-button" @click="handleCerca">
                     AGGIUNGI LINEA</div>
   </div>
+
+  // Popup Modal
+  
+  <div v-if="isPopupVisible" class="modal-overlay">
+      <div class="modal-content">
+        <h3>Linea Aggiunta</h3>
+        <p>L'operazione è stata completata con successo.</p>
+        <button @click="closePopup" class="modal-button">Chiudi</button>
+      </div>
+    </div>
+
 </template>
 
 <style scoped>
@@ -145,4 +226,107 @@ onMounted(fetchStops);
 .rowindex {
   width: 1%;
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); 
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); 
+  position: relative; 
+  animation: fadeIn 0.3s ease-out;
+}
+
+
+.modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+  color: #888;
+  transition: color 0.2s;
+}
+
+.modal-close-button:hover {
+  color: #333;
+}
+
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: border-color 0.2s;
+}
+
+input:focus {
+  outline: none;
+  border-color: #250fe7; 
+}
+
+
+.modal-button {
+  width: 100%;
+  background-color: #250fe7;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.modal-button:hover {
+  background-color: #1a08b3;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 </style>
