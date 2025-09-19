@@ -87,7 +87,7 @@ const fermateIntermedie = computed(() => {
 .risultato thead th {
     background-color: #ffda44;
     color: #2512d5;
-    font-weight: 600;
+    font-weight: bold;
     padding: 12px;
     text-align: left;
     border-bottom: 2px solid #2512d5;
