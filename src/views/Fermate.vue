@@ -76,10 +76,34 @@ onMounted(fetchStops);
     <div v-else>
       <p class="text-muted">Nessuna linea disponibile.</p>
     </div>
+    <div class="cerca-button" @click="handleCerca">
+                    AGGIUNGI LINEA</div>
   </div>
 </template>
 
 <style scoped>
+
+.cerca-button {
+    background-color: #ffda44;
+    color: #250fe7;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    margin-top: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.cerca-button:hover {
+  background-color: #e3c412; 
+}
+
+.cerca-button:active {
+  background-color: #004085; 
+  transform: translateY(1px); 
+}
 .lines-container {
   padding: 20px;
   background-color: #f9f9f9;
