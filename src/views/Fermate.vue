@@ -103,7 +103,7 @@ onMounted(fetchStops);
 }
 
 .cerca-button:active {
-  background-color: #004085; 
+  background-color: #e3c412; 
   transform: translateY(1px); 
 }
 .lines-container {
