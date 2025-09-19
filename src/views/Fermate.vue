@@ -152,8 +152,8 @@ const closePopup = () => {
                     AGGIUNGI LINEA</div>
   </div>
 
-  // Popup Modal
-  
+  <!-- Popup Modal --> 
+
   <div v-if="isPopupVisible" class="modal-overlay">
       <div class="modal-content">
         <h3>Linea Aggiunta</h3>
