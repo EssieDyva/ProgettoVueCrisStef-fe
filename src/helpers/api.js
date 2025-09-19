@@ -10,3 +10,7 @@ const apiClient = axios.create({
 export const getFermate = () => {
   return apiClient.get('/fermate/listaFermate');
 };
+
+export const insertFermate = () => {
+  return apiClient.post('/fermate/aggiungiFermata');
+};
