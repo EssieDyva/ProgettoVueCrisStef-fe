@@ -51,6 +51,8 @@ const fetchStops = async () => {
 
 // Esecuzione della funzione fetchStops al montaggio del componente
 onMounted(fetchStops);
+
+
 </script>
 
 <template>
@@ -97,7 +99,7 @@ onMounted(fetchStops);
 }
 
 .cerca-button:hover {
-  background-color: #e3c412; 
+  background-color: #e3c412;
 }
 
 .cerca-button:active {
