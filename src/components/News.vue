@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
+// Testo che verrà mostrato all'interno del paragrafo
 const newsText = ref('');
 newsText.value = 'Benvenuti nel nostro sito!';
 </script>

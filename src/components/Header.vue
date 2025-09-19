@@ -3,10 +3,12 @@ import { Navbar, Searchbar } from '.';
 </script>
 
 <template>
-    <RouterLink to="/" class="header">
-        <img src="../assets/CRISTE.png" alt="Header Image" class="header-image" />
+    <div class="header">
+        <RouterLink to="/">
+            <img src="../assets/CRISTE.png" alt="Header Image" class="header-image" />
+        </RouterLink>
         <Searchbar />
-    </RouterLink>
+    </div>
     <div>
         <Navbar />
     </div>

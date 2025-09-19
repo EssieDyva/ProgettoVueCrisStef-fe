@@ -1,3 +1,58 @@
+<script setup>
+import { ref, onMounted } from 'vue';
+import { getFermate } from '../helpers/api'
+
+const rawStops = ref([]);
+const lines = ref([]);
+const maxStops = ref(0);
+
+// Funzione asincrona per caricare le fermate dall'API
+const fetchStops = async () => {
+  try {
+    // Chiamata all'API per ottenere i dati delle fermate
+    const response = await getFermate();
+    const data = response.data;
+
+    // Salviamo i dati raw in una variabile reattiva
+    rawStops.value = data;
+
+    // Oggetto temporaneo per raggruppare le fermate per numero di linea
+    const grouped = {};
+
+    // Cicliamo tutte le fermate per raggrupparle in base al numero della linea
+    data.forEach(stop => {
+      const lineNumber = stop.numeroLinea;
+
+      // Se la linea non esiste ancora, inizializziamo l'array
+      if (!grouped[lineNumber]) {
+        grouped[lineNumber] = [];
+      }
+
+      // Aggiungiamo la fermata all'array della linea corrispondente
+      grouped[lineNumber].push({
+        id: stop.idFermata,
+        name: stop.nomeFermata,
+      });
+    });
+
+    // Convertiamo l'oggetto raggruppato in un array di linee con id, nome e fermate
+    lines.value = Object.entries(grouped).map(([lineNumber, stops]) => ({
+      id: parseInt(lineNumber),
+      name: `Linea ${lineNumber}`,
+      stops,
+    }));
+
+    // Calcoliamo il numero massimo di fermate tra tutte le linee per eventuali usi futuri
+    maxStops.value = Math.max(...lines.value.map(line => line.stops.length));
+  } catch (error) {
+    console.error('Errore durante il fetch delle fermate:', error);
+  }
+};
+
+// Esecuzione della funzione fetchStops al montaggio del componente
+onMounted(fetchStops);
+</script>
+
 <template>
   <div class="lines-container">
     <div v-if="lines.length">
@@ -23,47 +78,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref, onMounted } from 'vue';
-import { getFermate } from '../helpers/api'
-
-const rawStops = ref([]);
-const lines = ref([]);
-const maxStops = ref(0);
-
-const fetchStops = async () => {
-  try {
-    const response = await getFermate();
-    const data = response.data;
-    rawStops.value = data;
-
-    const grouped = {};
-    data.forEach(stop => {
-      const lineNumber = stop.numeroLinea;
-      if (!grouped[lineNumber]) {
-        grouped[lineNumber] = [];
-      }
-      grouped[lineNumber].push({
-        id: stop.idFermata,
-        name: stop.nomeFermata,
-      });
-    });
-
-    lines.value = Object.entries(grouped).map(([lineNumber, stops]) => ({
-      id: parseInt(lineNumber),
-      name: `Linea ${lineNumber}`,
-      stops,
-    }));
-
-    maxStops.value = Math.max(...lines.value.map(line => line.stops.length));
-  } catch (error) {
-    console.error('Errore durante il fetch delle fermate:', error);
-  }
-};
-
-onMounted(fetchStops);
-</script>
 
 <style scoped>
 .lines-container {

@@ -1,3 +1,31 @@
+<script setup>
+import { computed } from 'vue'
+
+// Definizione delle props ricevute dal componente genitore
+const props = defineProps({
+    linea: String,
+    partenza: String,
+    arrivo: String,
+    fermate: Array
+})
+
+// Proprietà calcolata che restituisce le fermate intermedie tra partenza e arrivo
+const fermateIntermedie = computed(() => {
+    // Trova l'indice della fermata di partenza e di arrivo nella lista
+    const startIndex = props.fermate.indexOf(props.partenza)
+    const endIndex = props.fermate.indexOf(props.arrivo)
+
+    // Se una delle fermate non viene trovata, restituiamo un array vuoto
+    if (startIndex === -1 || endIndex === -1) return []
+
+    // Se partenza è prima di arrivo nell'elenco, restituiamo la slice diretta
+    if (startIndex <= endIndex) return props.fermate.slice(startIndex, endIndex + 1)
+
+    // Se partenza è dopo arrivo, prendiamo la slice inversa e la invertiamo
+    else return props.fermate.slice(endIndex, startIndex + 1).reverse()
+})
+</script>
+
 <template>
     <div class="risultato">
         <h2>Fermate da "{{ partenza }}" a "{{ arrivo }}" sulla Linea {{ linea }}</h2>
@@ -20,27 +48,6 @@
         </div>
     </div>
 </template>
-
-<script setup>
-import { computed } from 'vue'
-
-const props = defineProps({
-    linea: String,
-    partenza: String,
-    arrivo: String,
-    fermate: Array
-})
-
-const fermateIntermedie = computed(() => {
-    const startIndex = props.fermate.indexOf(props.partenza)
-    const endIndex = props.fermate.indexOf(props.arrivo)
-    if (startIndex === -1 || endIndex === -1) return []
-
-    if (startIndex <= endIndex) return props.fermate.slice(startIndex, endIndex + 1)
-
-    else return props.fermate.slice(endIndex, startIndex + 1).reverse()
-})
-</script>
 
 <style scoped>
 .risultato {
