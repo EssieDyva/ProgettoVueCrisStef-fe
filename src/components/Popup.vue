@@ -49,6 +49,7 @@ function aggiungiFermata(event) {
             // Resetta i campi del form
             linea.value = "";
             nomeFermata.value = "";
+            location.reload(); // Ricarica la pagina per vedere la nuova fermata
         })
         .catch((error) => {
             console.error("Errore nell'aggiunta della fermata:", error);
