@@ -3,7 +3,6 @@ body {
   padding: 0;
   background-color: #d7d2ff;
   font-family: "Archivo Black", sans-serif;
-  overflow: hidden;
 }
 
 .leaflet-container {

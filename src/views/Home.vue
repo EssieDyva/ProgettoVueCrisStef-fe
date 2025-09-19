@@ -27,8 +27,12 @@ function risultato(payload) {
     </div>
     <div class="content-container">
         <Form @cerca="risultato" />
-        <FormResponse v-if="ricercaEffettuata" :linea="datiRicerca.linea" :partenza="datiRicerca.partenza"
-            :arrivo="datiRicerca.arrivo" :fermate="datiRicerca.fermate" @chiudi="ricercaEffettuata = false" />
+        <FormResponse v-if="ricercaEffettuata" 
+            :linea="datiRicerca.linea" 
+            :partenza="datiRicerca.partenza"
+            :arrivo="datiRicerca.arrivo" 
+            :fermate="datiRicerca.fermate"
+            @chiudi="ricercaEffettuata = false" />
         <Map v-else />
     </div>
 </template>
