@@ -11,6 +11,6 @@ export const getFermate = () => {
   return apiClient.get('/fermate/listaFermate');
 };
 
-export const insertFermate = () => {
-  return apiClient.post('/fermate/aggiungiFermata');
+export const insertFermate = (fermataData) => {
+  return apiClient.post('/fermate/aggiungiFermata', fermataData);
 };

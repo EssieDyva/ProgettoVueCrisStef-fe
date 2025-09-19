@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getFermate, insertFermate} from '../helpers/api'
-
+import { getFermate, insertFermate } from '../helpers/api'
+import { Popup } from '../components';
 
 const rawStops = ref([]);
 const lines = ref([]);
@@ -53,76 +53,14 @@ const fetchStops = async () => {
 // Esecuzione della funzione fetchStops al montaggio del componente
 onMounted(fetchStops);
 
-
-
-//POST CHIAMATA API
-
-/*
-const nomeFermata = ref('');
-const messaggio = ref('');
-
-const handleAggiungiFermata = async () => {
-
-  messaggio.value = '';
-  if (!nomeFermata.value) {
-    messaggio.value = 'Per favore, inserisci un nome per la fermata.';
-    return;
-  }
-  
-  const datiFermata = {
-    nome: nomeFermata.value,
-    latitudine: 0.0,  // Valori di esempio, da sostituire con dati reali
-    longitudine: 0.0
-  };
-
-  try {
-    const response = await fetch('http://localhost:8081/api', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(datiFermata)
-    });
-
-    if (!response.ok) {
-      throw new Error(`Errore del server: ${response.status}`);
-    }
-
-    const datiRisposta = await response.json();
-    messaggio.value = `Fermata '${datiRisposta.nome}' aggiunta con successo!`;
-    console.log('Fermata salvata:', datiRisposta);
-
-    // Resetta l'input per la prossima aggiunta
-    nomeFermata.value = '';
-
-  } catch (error) {
-    messaggio.value = `Errore nell'aggiungere la fermata: ${error.message}`;
-    console.error(error);
-  }
-};
-*/
-
-//POPPUP
-
 // Definisce una variabile reattiva per controllare la visibilità del popup
 const isPopupVisible = ref(false);
-
-// La funzione @click del tuo bottone
-const handleCerca = () => {
-  // Qui puoi mettere la logica della chiamata API vista in precedenza
-  
-  // Dopo aver completato l'operazione (o anche prima, a seconda del design),
-  // rendi il popup visibile
+const showPopup = () => {
   isPopupVisible.value = true;
 };
-
-// Funzione per chiudere il popup
 const closePopup = () => {
   isPopupVisible.value = false;
 };
-
-
-
 </script>
 
 <template>
@@ -148,35 +86,30 @@ const closePopup = () => {
     <div v-else>
       <p class="text-muted">Nessuna linea disponibile.</p>
     </div>
-    <div class="cerca-button" @click="handleCerca">
-                    AGGIUNGI LINEA</div>
+    <div class="cerca-button" @click="showPopup">
+      AGGIUNGI LINEA</div>
   </div>
 
-  <!-- Popup Modal --> 
+  <!-- Popup Modal -->
 
   <div v-if="isPopupVisible" class="modal-overlay">
-      <div class="modal-content">
-        <h3>Linea Aggiunta</h3>
-        <p>L'operazione è stata completata con successo.</p>
-        <button @click="closePopup" class="modal-button">Chiudi</button>
-      </div>
-    </div>
+    <Popup @chiudi="closePopup" />
+  </div>
 
 </template>
 
 <style scoped>
-
 .cerca-button {
-    background-color: #ffda44;
-    color: #250fe7;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-align: center;
-    cursor: pointer;
-    user-select: none;
-    margin-top: 20px;
-    transition: background-color 0.3s, color 0.3s;
+  background-color: #ffda44;
+  color: #250fe7;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  margin-top: 20px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .cerca-button:hover {
@@ -184,9 +117,10 @@ const closePopup = () => {
 }
 
 .cerca-button:active {
-  background-color: #e3c412; 
-  transform: translateY(1px); 
+  background-color: #e3c412;
+  transform: translateY(1px);
 }
+
 .lines-container {
   padding: 20px;
   background-color: #f9f9f9;
@@ -233,7 +167,7 @@ const closePopup = () => {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); 
+  background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
@@ -249,8 +183,8 @@ const closePopup = () => {
   text-align: center;
   width: 90%;
   max-width: 450px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); 
-  position: relative; 
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
   animation: fadeIn 0.3s ease-out;
 }
 
@@ -296,7 +230,7 @@ input {
 
 input:focus {
   outline: none;
-  border-color: #250fe7; 
+  border-color: #250fe7;
 }
 
 
@@ -323,10 +257,10 @@ input:focus {
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-
 </style>

@@ -176,7 +176,6 @@ onMounted(() => {
 .input-group input::placeholder {
     color: #2512d5;
     opacity: 50%;
-
 }
 
 .cerca-wrapper {
