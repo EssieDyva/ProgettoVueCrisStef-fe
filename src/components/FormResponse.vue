@@ -3,7 +3,7 @@ import { computed } from 'vue'
 
 // Definizione delle props ricevute dal componente genitore
 const props = defineProps({
-    linea: String,
+    linea: Number,
     partenza: String,
     arrivo: String,
     fermate: Array
