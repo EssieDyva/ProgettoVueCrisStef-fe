@@ -274,6 +274,10 @@ input:focus {
   transition: background-color 0.3s, color 0.3s;
 }
 
+.cerca-button3:hover {
+  background-color: #d01b1b;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
