@@ -1,8 +1,8 @@
 <script setup>
-import { ref, onMounted, watch } from "vue";
-import { getFermate } from "../helpers/api";
+import { onMounted, watch } from "vue";
+import { useFermateStore } from "../stores/fermate.store";
 
-// Definisce le props che il componente riceverà
+// Definisce le props che il componente riceverà 
 const props = defineProps({
     mode: {
         type: String,
@@ -16,50 +16,15 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["chiudi"]);
-const linee = ref([]);
-const linea = ref();
-const nomeFermata = ref("");
-const fermate = ref([]);
+const fermateStore = useFermateStore();
 
-const caricaLinee = async () => {
-    try {
-        const response = await getFermate();
-        const lineeUniche = [
-            ...new Set(response.data.map((fermata) => fermata.numeroLinea)),
-        ];
-        linee.value = lineeUniche
-            .map((numeroLinea) => ({
-                id: numeroLinea,
-                numero: numeroLinea,
-            }))
-            .sort((a, b) => a.numero - b.numero);
-    } catch (error) {
-        console.error("Errore nel caricamento delle linee:", error);
-    }
-};
+watch(() => fermateStore.linea, (nuovaLinea) => {
+    fermateStore.nomeFermata = "";
 
-const caricaFermate = async (numeroLinea) => {
-    try {
-        const response = await getFermate();
-        const fermateLinea = response.data.filter(
-            (fermata) => fermata.numeroLinea == numeroLinea
-        );
-        fermate.value = fermateLinea.map((fermata) => ({
-            id: fermata.idFermata,
-            nome: fermata.nomeFermata,
-        }));
-    } catch (error) {
-        console.error("Errore nel caricamento delle fermate:", error);
-        fermate.value = [];
-    }
-};
-
-watch(linea, (nuovaLinea) => {
-    nomeFermata.value = "";
     if (nuovaLinea) {
-        caricaFermate(nuovaLinea);
+        fermateStore.caricaFermate(nuovaLinea);
     } else {
-        fermate.value = [];
+        fermateStore.fermate = [];
     }
 });
 
@@ -67,22 +32,22 @@ function handleAction(event) {
     event.preventDefault();
 
     // Validazione per la modalità 'cancella' (nomeFermata è un numero)
-    if (props.mode === 'cancella' && !nomeFermata.value) {
+    if (props.mode === 'cancella' && !fermateStore.nomeFermata) {
         alert("Seleziona una fermata da cancellare.");
         return;
     }
-    
+
     // Validazione per la modalità 'aggiungi' (nomeFermata è una stringa)
-    if (props.mode === 'aggiungi' && !nomeFermata.value.trim()) {
+    if (props.mode === 'aggiungi' && !fermateStore.nomeFermata.trim()) {
         alert("Seleziona una linea e inserisci un nome per la fermata.");
         return;
     }
 
-    // Costruisci il payload in base alla modalità
+    // Costruisci il payload in base alla modalità 
     const payload =
         props.mode === "aggiungi"
-            ? { numeroLinea: linea.value, nomeFermata: nomeFermata.value.trim() }
-            : parseInt(nomeFermata.value);
+            ? { numeroLinea: fermateStore.linea, nomeFermata: fermateStore.nomeFermata.trim() }
+            : parseInt(fermateStore.nomeFermata);
 
     // Usa la prop `onAction` per chiamare la funzione del componente padre
     props
@@ -90,8 +55,8 @@ function handleAction(event) {
         .then(() => {
             alert(`Fermata ${props.mode === 'aggiungi' ? 'aggiunta' : 'cancellata'} con successo!`);
             // Resetta i campi
-            linea.value = "";
-            nomeFermata.value = "";
+            fermateStore.linea = "";
+            fermateStore.nomeFermata = "";
             // location.reload(); // Evita il ricaricamento, meglio gestire lo stato
             emit('chiudi'); // Chiudi il popup dopo il successo
         })
@@ -102,7 +67,7 @@ function handleAction(event) {
 }
 
 onMounted(() => {
-    caricaLinee();
+    fermateStore.caricaLinee();
 });
 </script>
 
@@ -110,9 +75,9 @@ onMounted(() => {
     <div class="popup">
         <div class="select-group">
             <h3>NUMERO DI LINEA</h3>
-            <select class="select" v-model="linea">
+            <select class="select" v-model="fermateStore.linea">
                 <option value="">Seleziona una linea</option>
-                <option v-for="lineaOption in linee" :key="lineaOption.id" :value="lineaOption.numero">
+                <option v-for="lineaOption in fermateStore.linee" :key="lineaOption.id" :value="lineaOption.numero">
                     {{ lineaOption.numero }}
                 </option>
             </select>
@@ -120,19 +85,19 @@ onMounted(() => {
         <div>
             <div>
                 <h3 class="input-title">NOME FERMATA</h3>
-                <select v-if="props.mode === 'cancella'" class="text" v-model="nomeFermata" :disabled="!linea">
+                <select v-if="props.mode === 'cancella'" class="text" v-model="fermateStore.nomeFermata" :disabled="!fermateStore.linea">
                     <option value="">
-                        {{ linea ? 'Seleziona fermata da cancellare' : 'Scegliere una linea' }}
+                        {{ fermateStore.linea ? 'Seleziona fermata da cancellare' : 'Scegliere una linea' }}
                     </option>
-                    <option v-for="fermata in fermate" :key="fermata.id" :value="fermata.id">
+                    <option v-for="fermata in fermateStore.fermate" :key="fermata.id" :value="fermata.id">
                         {{ fermata.nome }}
                     </option>
                 </select>
                 <input v-else type="text" class="text-input" placeholder="Inserisci il nome della nuova fermata"
-                    v-model="nomeFermata" :disabled="!linea" />
+                    v-model="fermateStore.nomeFermata" :disabled="!fermateStore.linea" />
             </div>
         </div>
-        <button class="submit-button" type="submit" @click="handleAction" :class="{ disabled: !linea || !nomeFermata }">
+        <button class="submit-button" type="submit" @click="handleAction" :class="{ disabled: !fermateStore.linea || !fermateStore.nomeFermata }">
             {{ props.mode === 'aggiungi' ? 'Aggiungi Fermata' : 'Cancella fermata' }}
         </button>
         <button class="modal-button" @click="$emit('chiudi')">Chiudi</button>
@@ -140,7 +105,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
 .popup {
     background-color: #fff;
     padding: 30px;
