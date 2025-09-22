@@ -95,7 +95,7 @@ const handleDelete = async (idFermata) => {
       <p class="text-muted">Nessuna linea disponibile.</p>
     </div>
     <div class="cerca-button" @click="showInsertPopup">AGGIUNGI FERMATA</div>
-    <div class="cerca-button" @click="showDeletePopup">RIMUOVI FERMATA</div>
+    <div class="cerca-button3" @click="showDeletePopup">RIMUOVI FERMATA</div>
   </div>
 
   <div v-if="isInsertPopupVisible" class="modal-overlay">
@@ -260,6 +260,19 @@ input:focus {
   background-color: #1a08b3;
 }
 
+.cerca-button3 {
+  background-color: #ff4444;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 18px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  margin-top: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
 
 @keyframes fadeIn {
   from {
