@@ -1,3 +1,4 @@
+import { ref } from "vue";
 import { defineStore } from "pinia";
 import { getFermate, insertFermate, deleteFermate } from "../helpers/api";
 

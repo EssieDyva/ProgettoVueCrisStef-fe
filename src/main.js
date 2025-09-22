@@ -1,9 +1,10 @@
 import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
+import { createPinia } from 'pinia'
 import { router } from './router'
-import 'leaflet/dist/leaflet.css'
+import App from './App.vue'
 import L from 'leaflet'
+import './style.css'
+import 'leaflet/dist/leaflet.css'
 
 delete L.Icon.Default.prototype._getIconUrl
 L.Icon.Default.mergeOptions({
@@ -12,6 +13,9 @@ L.Icon.Default.mergeOptions({
     shadowUrl: import.meta.url + '/../node_modules/leaflet/dist/images/marker-shadow.png',
 })
 
+const pinia = createPinia()
 const app = createApp(App)
+
 app.use(router)
+app.use(pinia)
 app.mount('#app')
