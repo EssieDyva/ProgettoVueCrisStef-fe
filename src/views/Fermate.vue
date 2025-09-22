@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getFermate } from '../helpers/api'
-import { InsertPopup, DeletePopup } from '../components';
+import { getFermate, insertFermate, deleteFermate } from '../helpers/api' // <-- AGGIUNTA
+import { Popup } from '../components';
 
 const rawStops = ref([]);
 const lines = ref([]);
@@ -10,50 +10,33 @@ const maxStops = ref(0);
 // Funzione asincrona per caricare le fermate dall'API
 const fetchStops = async () => {
   try {
-    // Chiamata all'API per ottenere i dati delle fermate
     const response = await getFermate();
     const data = response.data;
-
-    // Salviamo i dati raw in una variabile reattiva
     rawStops.value = data;
-
-    // Oggetto temporaneo per raggruppare le fermate per numero di linea
     const grouped = {};
-
-    // Cicliamo tutte le fermate per raggrupparle in base al numero della linea
     data.forEach(stop => {
       const lineNumber = stop.numeroLinea;
-
-      // Se la linea non esiste ancora, inizializziamo l'array
       if (!grouped[lineNumber]) {
         grouped[lineNumber] = [];
       }
-
-      // Aggiungiamo la fermata all'array della linea corrispondente
       grouped[lineNumber].push({
         id: stop.idFermata,
         name: stop.nomeFermata,
       });
     });
-
-    // Convertiamo l'oggetto raggruppato in un array di linee con id, nome e fermate
     lines.value = Object.entries(grouped).map(([lineNumber, stops]) => ({
       id: parseInt(lineNumber),
       name: `Linea ${lineNumber}`,
       stops,
     }));
-
-    // Calcoliamo il numero massimo di fermate tra tutte le linee per eventuali usi futuri
     maxStops.value = Math.max(...lines.value.map(line => line.stops.length));
   } catch (error) {
     console.error('Errore durante il fetch delle fermate:', error);
   }
 };
 
-// Esecuzione della funzione fetchStops al montaggio del componente
 onMounted(fetchStops);
 
-// Definisce una variabile reattiva per controllare la visibilità del popup
 const isInsertPopupVisible = ref(false);
 const showInsertPopup = () => {
   isInsertPopupVisible.value = true;
@@ -69,6 +52,23 @@ const showDeletePopup = () => {
 const closeDeletePopup = () => {
   isDeletePopupVisible.value = false;
 };
+
+// --- NUOVE FUNZIONI PER GESTIRE LE API ---
+const handleAdd = async (payload) => {
+    insertFermate(payload)
+    .then((response) => {
+        fetchStops();
+    })
+};
+
+const handleDelete = async (idFermata) => {
+    deleteFermate(idFermata)
+    .then((response) => {
+      fetchStops();
+    })
+};
+// ------------------------------------------
+
 </script>
 
 <template>
@@ -98,17 +98,16 @@ const closeDeletePopup = () => {
     <div class="cerca-button" @click="showDeletePopup">RIMUOVI FERMATA</div>
   </div>
 
-  <!-- Popup Modal -->
-
   <div v-if="isInsertPopupVisible" class="modal-overlay">
-    <InsertPopup @chiudi="closeInsertPopup" />
+    <Popup @chiudi="closeInsertPopup" mode="aggiungi" :onAction="handleAdd" />
   </div>
   <div v-if="isDeletePopupVisible" class="modal-overlay">
-    <DeletePopup @chiudi="closeDeletePopup" />
+    <Popup @chiudi="closeDeletePopup" mode="cancella" :onAction="handleDelete" />
   </div>
 </template>
 
 <style scoped>
+
 .cerca-button {
   background-color: #ffda44;
   color: #250fe7;
