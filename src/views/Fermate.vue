@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getFermate, insertFermate } from '../helpers/api'
-import { Popup } from '../components';
+import { getFermate } from '../helpers/api'
+import { InsertPopup, DeletePopup } from '../components';
 
 const rawStops = ref([]);
 const lines = ref([]);
@@ -54,12 +54,20 @@ const fetchStops = async () => {
 onMounted(fetchStops);
 
 // Definisce una variabile reattiva per controllare la visibilità del popup
-const isPopupVisible = ref(false);
-const showPopup = () => {
-  isPopupVisible.value = true;
+const isInsertPopupVisible = ref(false);
+const showInsertPopup = () => {
+  isInsertPopupVisible.value = true;
 };
-const closePopup = () => {
-  isPopupVisible.value = false;
+const closeInsertPopup = () => {
+  isInsertPopupVisible.value = false;
+};
+
+const isDeletePopupVisible = ref(false);
+const showDeletePopup = () => {
+  isDeletePopupVisible.value = true;
+};
+const closeDeletePopup = () => {
+  isDeletePopupVisible.value = false;
 };
 </script>
 
@@ -86,16 +94,18 @@ const closePopup = () => {
     <div v-else>
       <p class="text-muted">Nessuna linea disponibile.</p>
     </div>
-    <div class="cerca-button" @click="showPopup">
-      AGGIUNGI LINEA</div>
+    <div class="cerca-button" @click="showInsertPopup">AGGIUNGI FERMATA</div>
+    <div class="cerca-button" @click="showDeletePopup">RIMUOVI FERMATA</div>
   </div>
 
   <!-- Popup Modal -->
 
-  <div v-if="isPopupVisible" class="modal-overlay">
-    <Popup @chiudi="closePopup" />
+  <div v-if="isInsertPopupVisible" class="modal-overlay">
+    <InsertPopup @chiudi="closeInsertPopup" />
   </div>
-
+  <div v-if="isDeletePopupVisible" class="modal-overlay">
+    <DeletePopup @chiudi="closeDeletePopup" />
+  </div>
 </template>
 
 <style scoped>

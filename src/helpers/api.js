@@ -14,3 +14,7 @@ export const getFermate = () => {
 export const insertFermate = (fermataData) => {
   return apiClient.post('/fermate/aggiungiFermata', fermataData);
 };
+
+export const deleteFermate = (idFermata) => {
+  return apiClient.delete(`/fermate/rimuoviFermata/${idFermata}`);
+}
