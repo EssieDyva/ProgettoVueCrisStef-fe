@@ -78,7 +78,7 @@ onMounted(() => {
             <select class="select" v-model="fermateStore.linea">
                 <option value="">Seleziona una linea</option>
                 <option v-for="lineaOption in fermateStore.linee" :key="lineaOption.id" :value="lineaOption.numero">
-                    {{ lineaOption.numero }}
+                    LINEA {{ lineaOption.numero }}
                 </option>
             </select>
         </div>
