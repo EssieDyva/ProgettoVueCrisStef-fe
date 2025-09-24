@@ -2,8 +2,6 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 import { getFermate, insertFermate, deleteFermate } from "../helpers/api";
 
-const baseURL = 'http://localhost:8081/api/fermate';
-
 export const useFermateStore = defineStore('fermate', () => {
     const linee = ref([]);
     const linea = ref();

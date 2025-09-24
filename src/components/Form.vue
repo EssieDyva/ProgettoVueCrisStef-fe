@@ -48,7 +48,7 @@ onMounted(() => {
             <div class="linea-group">
                 <h3 class="input-title">LINEA</h3>
                 <select class="text" v-model="fermateStore.linea">
-                    <option value="">Seleziona una linea</option>
+                    <option value="" disabled>Seleziona una linea</option>
                     <option v-for="lineaOption in fermateStore.linee" :key="lineaOption.id" :value="lineaOption.numero">
                         Linea {{ lineaOption.numero }}
                     </option>
@@ -58,7 +58,7 @@ onMounted(() => {
                 <div class="input-group">
                     <h3 class="input-title">FERMATA DI PARTENZA</h3>
                     <select class="text" v-model="partenza" :disabled="!fermateStore.linea">
-                        <option value="">
+                        <option value="" disabled>
                             {{ fermateStore.linea ? 'Seleziona fermata di partenza' : 'Scegliere una linea' }}
                         </option>
                         <option v-for="fermata in fermateStore.fermate" :key="fermata.id" :value="fermata.nome">
@@ -69,7 +69,7 @@ onMounted(() => {
                 <div class="input-group">
                     <h3 class="input-title">FERMATA DI ARRIVO</h3>
                     <select class="text" v-model="arrivo" :disabled="!fermateStore.linea">
-                        <option value="">
+                        <option value="" disabled>
                             {{ fermateStore.linea ? 'Seleziona fermata di arrivo' : 'Scegliere una linea' }}
                         </option>
                         <option v-for="fermata in fermateStore.fermate" :key="fermata.id" :value="fermata.nome">
